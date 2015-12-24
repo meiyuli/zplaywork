@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<app>
+	<log>
+		<loglevel level="1"/>
+		<logindex index="/data/projects/tailToKafka/applog/data_extra.idx"/>
+		<logfile file="/data/projects/tailToKafka/applog/data_extra.log"/>
+	</log>
+	<handle thread="1"/>
+	<kafka>
+		<brokers items="119.29.133.153:9092,119.29.116.80:9092,119.29.72.74:9092"/>
+		<!--(-2:hash算法,-1:默认)-->
+		<partition item="-2"/>
+		<!--(-2:begin,-1:end,-1000:stored,others-->
+		<offset item="-1000"/>
+		<topics>
+                        <topic name="adx_ssp" group="123.57.166.47">
+	                        <source pattern="^ssp.log.201[0-9]{9}$"
+                                path="/data/logs/adxengine"/>
+        	        </topic>
+                	<topic name="adx_dsp" group="123.57.166.47">
+                        	<source pattern="^dsp.log.201[0-9]{9}$"
+                                path="/data/logs/adxengine"/>
+                        </topic>
+		</topics>
+	</kafka>
+</app>

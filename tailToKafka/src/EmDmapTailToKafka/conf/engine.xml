@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<app>
+	<log>
+		<loglevel level="1"/>
+		<logindex index="/data/dmap/applog/EmDmapTailToKafka/data_extra.idx"/>
+		<logfile file="/data/dmap/applog/EmDmapTailToKafka/data_extra.log"/>
+	</log>
+	<handle thread="12"/>
+	<kafka>
+		<brokers items="host160:9092,host161:9092,host162:9092,host163:9092,host164:9092,host165:9092,host166:9092"/>
+		<!--(-2:hash算法,-1:默认)-->
+		<partition item="0"/>
+		<!--(-2:begin,-1:end,-1000:stored,others-->
+		<offset item="-1000"/>
+		<topics>
+			<topic name="AdwPvList" group="test">
+					<source pattern="^pv.log.201[0-9]{9}$" 
+					path="/adwiser/data/provide/pv/"/>
+			</topic>
+			<topic name="AdwOrdList" group="test">
+					<source pattern="^ord.log.201[0-9]{9}$"
+					prefix="ord.*"
+					path="/adwiser/data/provide/order/"/>
+			</topic>
+			<topic name="AdwEvtList" group="test">
+					<source pattern="^evt.log.201[0-9]{9}$"
+					prefix="evt.*"
+					path="/adwiser/data/provide/event/"/>
+			</topic>
+			<topic name="AdwOrdDetailList" group="test">
+					<source pattern="^detail.log.201[0-9]{9}$"
+					prefix="orddetail.*"
+					path="/adwiser/data/provide/detail/"/>
+			</topic>
+			<topic name="BsShwList" group="test">
+					<source pattern="^bs.log.201[0-9]{9}$"
+					prefix="bs.*"
+					path="/adwiser/data/provide/bs/"/>
+			</topic>
+		</topics>
+	</kafka>
+</app>
