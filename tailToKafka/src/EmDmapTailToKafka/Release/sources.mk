@@ -2,37 +2,37 @@
 # Automatically-generated file. Do not edit!
 ################################################################################
 
+O_SRCS := 
+CPP_SRCS := 
 C_UPPER_SRCS := 
+C_SRCS := 
+S_UPPER_SRCS := 
+OBJ_SRCS := 
+ASM_SRCS := 
 CXX_SRCS := 
 C++_SRCS := 
-OBJ_SRCS := 
 CC_SRCS := 
-ASM_SRCS := 
-C_SRCS := 
-CPP_SRCS := 
-O_SRCS := 
-S_UPPER_SRCS := 
-CC_DEPS := 
-C++_DEPS := 
-EXECUTABLES := 
 OBJS := 
-C_UPPER_DEPS := 
-CXX_DEPS := 
+C++_DEPS := 
 C_DEPS := 
+CC_DEPS := 
 CPP_DEPS := 
+EXECUTABLES := 
+CXX_DEPS := 
+C_UPPER_DEPS := 
 
 # Every subdirectory with source files must be described here
 SUBDIRS := \
-src/kernel \
-src/include/tinyxml \
-src/include/threadpool \
-src/include/thread \
-src/include/rdkafka \
-src/include/md5 \
-src/include/logstat \
-src/include/log \
-src/include/command \
-src/include/WaitQuitSignal \
-src/config \
 src \
+src/config \
+src/include/WaitQuitSignal \
+src/include/command \
+src/include/log \
+src/include/logstat \
+src/include/md5 \
+src/include/rdkafka \
+src/include/thread \
+src/include/threadpool \
+src/include/tinyxml \
+src/kernel \
 

@@ -282,6 +282,10 @@ int32_t FileManager::ProcessFilesFromDirectory() {
 	return 0;
 }
 
+/**
+ * \brief 每次读取文件时，根据当前文件开始时刻到大小读取。
+ */
+
 long FileManager::FilesRead(const char *file, long size) {
 	if (!file) return -1;
 
@@ -293,6 +297,15 @@ long FileManager::FilesRead(const char *file, long size) {
 		logg(WARN, "cant open file to process, file: %s", file);
 		return -2;
 	}
+	///> 获取文件位置
+	input.seekg(0, ios::end);
+	long fileLen = input.tellg();
+
+	if (fileLen <= size) {
+		///> 文件尾小于或等于所要获取位置，则直接返回
+		return fileLen;
+	}
+	///> 设置当前获取位置
 	input.seekg(size);
 	input.exceptions(std::ifstream::badbit | std::ifstream::failbit);
 
@@ -312,9 +325,9 @@ long FileManager::FilesRead(const char *file, long size) {
 
 				nSize = input.tellg(); 	// 当前读取到文件位置
 
-				if (false == g_bTaskFlag) {
-                        		break;
-                		}
+				if (false == g_bTaskFlag || nSize >= fileLen) {
+					break;
+				}
 				line_data.clear();
 			}
 		} catch(std::ifstream::failure e) {

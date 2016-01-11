@@ -4,5 +4,4 @@
 
 USER_OBJS :=
 
-LIBS := -lrdkafka -lrdkafka++ -lz -lrt -lpthread -lcrypto
-
+LIBS := -lcrypto -lrdkafka -lrdkafka++ -lz -lrt -lpthread
