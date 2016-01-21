@@ -315,11 +315,25 @@ long FileManager::FilesRead(const char *file, long size) {
 		//char line_data[MAX_DATA_LEN] = {0};
 		try {
 			std::string line_data;
+			std::string line_record;
 			while(std::getline(input, line_data)) {
 				//input.getline(line_data,MAX_DATA_LEN);
 
 				// line_data[strlen(line_data) - 1] = 0;
-				DataCommand *pCmd = new DataCommand(m_nTopic,line_data);
+				// 判断line_data后两位不为\0x03\n,则记录数据，循环继续
+				size_t len = line_data.length();
+				if (len < 1) {
+					continue;
+				}
+
+				if (line_data.substr(len - 1).compare("\003")) {
+					line_record += line_data;
+					continue;
+				}else {
+					line_record += line_data.substr(0, len -1);
+				}
+
+				DataCommand *pCmd = new DataCommand(m_nTopic,line_record);
 				pCmd->m_nCmdID = CMD_DATA_DATA;
 				pCmdMgr->AddOperator(pCmd);
 
@@ -329,6 +343,7 @@ long FileManager::FilesRead(const char *file, long size) {
 					break;
 				}
 				line_data.clear();
+				line_record.clear();
 			}
 		} catch(std::ifstream::failure e) {
 			if (!input.eof()) {
